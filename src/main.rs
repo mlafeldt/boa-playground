@@ -1,7 +1,10 @@
-use boa_engine::property::Attribute;
+// https://boa-dev.github.io/posts/2022-10-24-boa-usage/
+
 use boa_engine::{
     builtins::JsArgs,
     class::{Class, ClassBuilder},
+    object::JsArray,
+    property::Attribute,
     Context, JsResult, JsValue,
 };
 use boa_gc::{Finalize, Trace};
@@ -18,7 +21,8 @@ fn main() {
         console.log(PROJECT_VERSION);
         let person = new Person("Mathias", 38);
         person.say_hello();
-        PROJECT_VERSION
+        let arr = ['a', 2, 5.4, "Hello"];
+        reverseAppend(arr);
     "#;
 
     let mut ctx = Context::default();
@@ -26,6 +30,7 @@ fn main() {
     ctx.register_global_class::<Person>()
         .expect("could not register class");
     ctx.register_global_property("PROJECT_VERSION", "1.0.0", Attribute::default());
+    ctx.register_global_builtin_function("reverseAppend", 1, reverse_append);
 
     // let stmts = ctx.parse(js_code).unwrap();
     // let code_block = ctx.compile(&stmts).unwrap();
@@ -84,4 +89,25 @@ impl Class for Person {
 
         Ok(())
     }
+}
+
+fn reverse_append(_this: &JsValue, args: &[JsValue], ctx: &mut Context) -> JsResult<JsValue> {
+    let arr = args
+        .get_or_undefined(0)
+        .as_object()
+        .ok_or_else(|| ctx.construct_type_error("argument must be an array"))?;
+
+    let arr = JsArray::from_object(arr.clone(), ctx)?;
+
+    let reverse = arr.reverse(ctx)?;
+    reverse.push("My Project", ctx)?;
+
+    let global_object = ctx.global_object().clone();
+    let version = global_object
+        .get("PROJECT_VERSION", ctx)
+        .unwrap_or_default();
+
+    reverse.push(version, ctx)?;
+
+    Ok(reverse.into())
 }
