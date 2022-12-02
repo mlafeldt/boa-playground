@@ -16,14 +16,7 @@ struct Person {
 }
 
 fn main() {
-    let js_code = r#"
-        console.log("Hello World from a JS code string!");
-        console.log(PROJECT_VERSION);
-        let person = new Person("Mathias", 38);
-        person.say_hello();
-        let arr = ['a', 2, 5.4, "Hello"];
-        reverseAppend(arr);
-    "#;
+    let js_code = std::fs::read_to_string("bundle.js").unwrap();
 
     let mut ctx = Context::default();
 
@@ -31,10 +24,6 @@ fn main() {
         .expect("could not register class");
     ctx.register_global_property("PROJECT_VERSION", "1.0.0", Attribute::default());
     ctx.register_global_builtin_function("reverseAppend", 1, reverse_append);
-
-    // let stmts = ctx.parse(js_code).unwrap();
-    // let code_block = ctx.compile(&stmts).unwrap();
-    // ctx.execute(code_block.clone())
 
     match ctx.eval(&js_code) {
         Ok(res) if !res.is_undefined() => {
