@@ -25,7 +25,7 @@ let { name, age } = person; // Object destructuring assignment
 console.log(name, age);
 
 // Promise
-const asyncCall = new Promise((resolve) => {
+new Promise((resolve) => {
   resolve();
 }).then(() => {
   console.log("Promise resolved!");
@@ -47,16 +47,14 @@ obj.getName();
 
 // Arrow function
 const sum = (a, b) => a + b;
-sum(10, 20);
+console.log(sum(10, 20));
 
-// Module
+// Module loading
 import { reverse } from "lib";
 const arr = reverse("Hello");
 console.log("Array:", arr);
 
-// Top-level await crashes
-// SWC: top level await requires target to es2017 or higher and topLevelAwait:true for ecmascript
-// async function promise() {
-//  return Promise.resolved('hello');
-// }
-// await promise();
+async function go() {
+  return new Promise(() => console.log("go done"));
+};
+go().catch((e) => console.error(e));

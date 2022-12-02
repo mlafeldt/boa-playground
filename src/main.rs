@@ -16,7 +16,10 @@ struct Person {
 }
 
 fn main() {
-    let js_code = std::fs::read_to_string("bundle.js").unwrap();
+    let js_path = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "bundle.js".to_string());
+    let js_code = std::fs::read_to_string(js_path).unwrap();
 
     let mut ctx = Context::default();
 

@@ -11,10 +11,10 @@
       "exportNamespaceFrom": false,
       "decorators": false,
       "decoratorsBeforeExport": false,
-      "topLevelAwait": false,
+      "topLevelAwait": true,
       "importMeta": false
     },
-    "target": "es5",
+    "target": "es2017",
     "loose": false,
     "externalHelpers": false
   },
