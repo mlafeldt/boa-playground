@@ -25,7 +25,7 @@ let { name, age } = person; // Object destructuring assignment
 console.log(name, age);
 
 // Promise
-new Promise((resolve) => {
+new Promise<void>((resolve) => {
   resolve();
 }).then(() => {
   console.log("Promise resolved!");
@@ -33,7 +33,10 @@ new Promise((resolve) => {
 
 // Class
 class UserProfile {
-  constructor(firstName, lastName) {
+  firstName: string;
+  lastName: string;
+
+  constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -46,11 +49,11 @@ const obj = new UserProfile("John", "Smith");
 obj.getName();
 
 // Arrow function
-const sum = (a, b) => a + b;
+const sum = (a: number, b: number) => a + b;
 console.log(sum(10, 20));
 
 // Module loading
-import { reverse } from "lib";
+import { reverse } from "./lib";
 const arr = reverse("Hello");
 console.log("Array:", arr);
 

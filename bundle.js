@@ -25,10 +25,10 @@
 });
 
 (function(global, factory) {
-    if (typeof module === "object" && typeof module.exports === "object") factory(exports, require("lib"));
+    if (typeof module === "object" && typeof module.exports === "object") factory(exports, require("./lib"));
     else if (typeof define === "function" && define.amd) define([
         "exports",
-        "lib"
+        "./lib"
     ], factory);
     else if (global = typeof globalThis !== "undefined" ? globalThis : global || self) factory(global.main = {}, global.lib);
 })(this, function(exports, _lib) {

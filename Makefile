@@ -2,4 +2,4 @@ run: bundle
 	cargo run
 
 bundle:
-	swc lib.js main.js -o bundle.js
+	swc lib.ts main.ts -o bundle.js
