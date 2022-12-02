@@ -27,10 +27,13 @@ fn main() {
 
     match ctx.eval(&js_code) {
         Ok(res) if !res.is_undefined() => {
-            println!("{}", JsValue::to_json(&res, &mut ctx).unwrap());
+            println!(
+                "Script returned: {}",
+                JsValue::to_json(&res, &mut ctx).unwrap()
+            );
         }
         Ok(_) => {
-            println!("undefined");
+            println!("Script returned: undefined");
         }
         Err(e) => {
             eprintln!("Uncaught {}", e.display());

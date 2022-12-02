@@ -1,5 +1,5 @@
-run: bundle.js
+run: bundle
 	cargo run
 
-bundle.js: code.js
-	swc $< -o $@
+bundle:
+	swc lib.js main.js -o bundle.js

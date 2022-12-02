@@ -8,14 +8,8 @@ function hello(name = "Mathias") {
   person.say_hello();
 }
 
-function reverse() {
-  const arr = ["a", 2, 5.4, "Hello"];
-  return reverseAppend(arr);
-}
-
 log();
 hello();
-reverse();
 
 // Testing some ES6 features
 // https://www.boardinfinity.com/blog/top-10-features-of-es6/
@@ -38,19 +32,31 @@ const asyncCall = new Promise((resolve) => {
 });
 
 // Class
-class UserProfile {   
-   constructor(firstName, lastName) { 
-      this.firstName = firstName;
-      this.lastName = lastName;     
-   }  
-    
-   getName() {       
-     console.log(`The Full-Name is ${this.firstName} ${this.lastName}`);    
-   } 
+class UserProfile {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  getName() {
+    console.log(`The Full-Name is ${this.firstName} ${this.lastName}`);
+  }
 }
-const obj = new UserProfile('John', 'Smith');
+const obj = new UserProfile("John", "Smith");
 obj.getName();
 
 // Arrow function
 const sum = (a, b) => a + b;
 sum(10, 20);
+
+// Module
+import { reverse } from "lib";
+const arr = reverse("Hello");
+console.log("Array:", arr);
+
+// Top-level await crashes
+// SWC: top level await requires target to es2017 or higher and topLevelAwait:true for ecmascript
+// async function promise() {
+//  return Promise.resolved('hello');
+// }
+// await promise();
