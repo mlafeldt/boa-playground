@@ -11,4 +11,4 @@ const go = async () => {
   new Promise(() => console.log("go done"));
 };
 
-go()
+go();

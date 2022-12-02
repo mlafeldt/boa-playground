@@ -56,5 +56,5 @@ console.log("Array:", arr);
 
 async function go() {
   return new Promise(() => console.log("go done"));
-};
+}
 go().catch((e) => console.error(e));
