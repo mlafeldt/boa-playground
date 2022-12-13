@@ -9,6 +9,8 @@ path = "worker.rs"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+# There's also https://github.com/boa-dev/boa/blob/main/boa_wasm/Cargo.toml
+# but it's not published to crates.io
 boa_engine = { version = "0.16", features = ["console"] }
 getrandom = { version = "0.2", features = ["js"] }
 worker = "0.0.12"
