@@ -37,6 +37,8 @@ fn main() {
             eprintln!("Uncaught {}", e);
         }
     }
+
+    ctx.run_jobs();
 }
 
 #[derive(Debug, Trace, Finalize)]
