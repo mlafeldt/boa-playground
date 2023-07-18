@@ -7,7 +7,7 @@
       "decorators": false,
       "dynamicImport": false
     },
-    "target": "es5",
+    "target": "esnext",
     "loose": false,
     "externalHelpers": false
   },
