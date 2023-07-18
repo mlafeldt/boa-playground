@@ -12,6 +12,7 @@ fn main() {
     let js_code = std::fs::read_to_string(js_path).unwrap();
 
     let mut ctx = Context::default();
+    ctx.strict(true);
 
     let console = Console::init(&mut ctx);
     ctx.register_global_property(Console::NAME, console, Attribute::all())
