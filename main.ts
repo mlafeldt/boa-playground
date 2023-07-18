@@ -5,7 +5,7 @@ function log() {
 
 function hello(name = "Mathias") {
   const person = new Person(name, 38);
-  person.say_hello();
+  person.sayHello();
 }
 
 log();

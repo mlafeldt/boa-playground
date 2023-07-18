@@ -247,7 +247,7 @@
     function hello() {
         var name = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "Mathias";
         var person = new Person(name, 38);
-        person.say_hello();
+        person.sayHello();
     }
     log();
     hello();
