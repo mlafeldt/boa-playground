@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use boa_engine::{
     class::{Class, ClassBuilder},
     object::builtins::JsArray,
@@ -9,7 +11,7 @@ use boa_runtime::Console;
 
 fn main() {
     let js_path = std::env::args().nth(1).unwrap_or_else(|| "bundle.js".to_string());
-    let js_code = std::fs::read_to_string(js_path).unwrap();
+    let js_code = Source::from_filepath(Path::new(&js_path)).unwrap();
 
     let mut ctx = Context::default();
     ctx.strict(true);
@@ -26,7 +28,7 @@ fn main() {
     ctx.register_global_builtin_callable("reverseAppend", 1, NativeFunction::from_fn_ptr(reverse_append))
         .unwrap();
 
-    match ctx.eval(Source::from_bytes(&js_code)) {
+    match ctx.eval(js_code) {
         Ok(res) if !res.is_undefined() => {
             println!("Script returned: {}", JsValue::to_json(&res, &mut ctx).unwrap());
         }
