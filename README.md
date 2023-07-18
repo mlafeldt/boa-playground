@@ -1,4 +1,4 @@
-## Exploring <https://boa-dev.github.io/>
+## Exploring <https://boajs.dev>
 
 Install swc:
 
