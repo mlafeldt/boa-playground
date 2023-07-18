@@ -1,4 +1,5 @@
 // cargo run -- broken/topLevelAwait.js
+// Got: Uncaught SyntaxError: expected token ';', got 'f1' in expression statement at line 23, col 7
 
 async function f1() {
   console.log("promise 1 resolved");
@@ -20,7 +21,5 @@ async function main() {
 main();
 
 await f1();
-await new Promise(() => console.log("promise 3 resolved"));
-// This crashes
-// thread 'main' panicked at 'Assertion: <handlerResult is not an abrupt completion> failed', /Users/mathias/.cargo/registry/src/github.com-1ecc6299db9ec823/boa_engine-0.16.0/src/builtins/promise/promise_job.rs:66:25
-// await sleep(1000);
+await Promise.resolve(console.log("promise 2 resolved"));
+await sleep(1000);
