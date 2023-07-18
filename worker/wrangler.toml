@@ -1,7 +1,0 @@
-name = "boa-worker"
-main = "build/worker/shim.mjs"
-workers_dev = true
-compatibility_date = "2022-12-13"
-
-[build]
-command = "worker-build --release"
