@@ -38,12 +38,12 @@
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    function _arrayLikeToArray(arr, len) {
+    function _array_like_to_array(arr, len) {
         if (len == null || len > arr.length) len = arr.length;
         for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
         return arr2;
     }
-    function _arrayWithHoles(arr) {
+    function _array_with_holes(arr) {
         if (Array.isArray(arr)) return arr;
     }
     function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -60,7 +60,7 @@
             Promise.resolve(value).then(_next, _throw);
         }
     }
-    function _asyncToGenerator(fn) {
+    function _async_to_generator(fn) {
         return function() {
             var self1 = this, args = arguments;
             return new Promise(function(resolve, reject) {
@@ -75,12 +75,39 @@
             });
         };
     }
-    function _classCallCheck(instance, Constructor) {
+    function _class_call_check(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
             throw new TypeError("Cannot call a class as a function");
         }
     }
-    function _iterableToArrayLimit(arr, i) {
+    function _defineProperties(target, props) {
+        for(var i = 0; i < props.length; i++){
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }
+    function _create_class(Constructor, protoProps, staticProps) {
+        if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) _defineProperties(Constructor, staticProps);
+        return Constructor;
+    }
+    function _define_property(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            });
+        } else {
+            obj[key] = value;
+        }
+        return obj;
+    }
+    function _iterable_to_array_limit(arr, i) {
         var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
         if (_i == null) return;
         var _arr = [];
@@ -104,21 +131,21 @@
         }
         return _arr;
     }
-    function _nonIterableRest() {
+    function _non_iterable_rest() {
         throw new TypeError("Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }
-    function _slicedToArray(arr, i) {
-        return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+    function _sliced_to_array(arr, i) {
+        return _array_with_holes(arr) || _iterable_to_array_limit(arr, i) || _unsupported_iterable_to_array(arr, i) || _non_iterable_rest();
     }
-    function _unsupportedIterableToArray(o, minLen) {
+    function _unsupported_iterable_to_array(o, minLen) {
         if (!o) return;
-        if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+        if (typeof o === "string") return _array_like_to_array(o, minLen);
         var n = Object.prototype.toString.call(o).slice(8, -1);
         if (n === "Object" && o.constructor) n = o.constructor.name;
         if (n === "Map" || n === "Set") return Array.from(n);
-        if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+        if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _array_like_to_array(o, minLen);
     }
-    var __generator = (void 0) && (void 0).__generator || function(thisArg, body) {
+    function _ts_generator(thisArg, body) {
         var f, y, t, g, _ = {
             label: 0,
             sent: function() {
@@ -212,7 +239,7 @@
                 done: true
             };
         }
-    };
+    }
     function log() {
         console.log("Hello World from a JS code string!");
         console.log("Project version: ".concat(PROJECT_VERSION));
@@ -231,7 +258,7 @@
         "Apple",
         "Banana"
     ];
-    var _fruits = _slicedToArray(fruits, 2), a = _fruits[0], b = _fruits[1]; // Array destructuring assignment
+    var _fruits = _sliced_to_array(fruits, 2), a = _fruits[0], b = _fruits[1]; // Array destructuring assignment
     console.log(a, b);
     // Object Destructuring
     var person = {
@@ -250,14 +277,20 @@
     var UserProfile = /*#__PURE__*/ function() {
         "use strict";
         function UserProfile(firstName, lastName) {
-            _classCallCheck(this, UserProfile);
+            _class_call_check(this, UserProfile);
+            _define_property(this, "firstName", void 0);
+            _define_property(this, "lastName", void 0);
             this.firstName = firstName;
             this.lastName = lastName;
         }
-        var _proto = UserProfile.prototype;
-        _proto.getName = function getName() {
-            console.log("The Full-Name is ".concat(this.firstName, " ").concat(this.lastName));
-        };
+        _create_class(UserProfile, [
+            {
+                key: "getName",
+                value: function getName() {
+                    console.log("The Full-Name is ".concat(this.firstName, " ").concat(this.lastName));
+                }
+            }
+        ]);
         return UserProfile;
     }();
     var obj = new UserProfile("John", "Smith");
@@ -273,8 +306,8 @@
         return _go.apply(this, arguments);
     }
     function _go() {
-        _go = _asyncToGenerator(function() {
-            return __generator(this, function(_state) {
+        _go = _async_to_generator(function() {
+            return _ts_generator(this, function(_state) {
                 return [
                     2,
                     new Promise(function() {
@@ -290,5 +323,3 @@
     });
 });
 
-
-//# sourceMappingURL=bundle.js.map
