@@ -11,9 +11,3 @@ Build and run examples:
 ```console
 make
 ```
-
-Run broken test cases:
-
-```console
-cargo run -- broken/xxx.js
-```
