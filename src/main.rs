@@ -1,10 +1,11 @@
 use std::path::Path;
 
 use boa_engine::{
+    builtins::promise::PromiseState,
     class::{Class, ClassBuilder},
     object::builtins::JsArray,
     property::Attribute,
-    Context, JsArgs, JsNativeError, JsResult, JsString, JsValue, NativeFunction, Source,
+    Context, JsArgs, JsError, JsNativeError, JsResult, JsString, JsValue, Module, NativeFunction, Source,
 };
 use boa_gc::{Finalize, Trace};
 use boa_runtime::Console;
@@ -28,19 +29,22 @@ fn main() {
     ctx.register_global_builtin_callable("reverseAppend", 1, NativeFunction::from_fn_ptr(reverse_append))
         .unwrap();
 
-    match ctx.eval(js_code) {
-        Ok(res) if !res.is_undefined() => {
-            println!("Script returned: {}", JsValue::to_json(&res, &mut ctx).unwrap());
+    let module = Module::parse(js_code, None, &mut ctx).unwrap();
+    let promise = module.load_link_evaluate(&mut ctx).unwrap();
+    ctx.run_jobs();
+
+    match promise.state().expect("promise always has a state") {
+        PromiseState::Fulfilled(val) => {
+            println!("Module execution successful: {val:?}");
         }
-        Ok(_) => {
-            println!("Script returned: undefined");
+        PromiseState::Rejected(reason) => {
+            let err = JsError::from_opaque(reason);
+            eprintln!("Module execution failed: {err}");
         }
-        Err(e) => {
-            eprintln!("Uncaught {}", e);
+        PromiseState::Pending => {
+            eprintln!("Module execution pending");
         }
     }
-
-    ctx.run_jobs();
 }
 
 #[derive(Debug, Trace, Finalize)]
