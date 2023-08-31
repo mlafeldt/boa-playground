@@ -2,8 +2,36 @@
 name = "boa-hello"
 version = "0.1.0"
 edition = "2021"
+default-run = "hello"
+
+[[bin]]
+name = "hello"
+path = "src/main.rs"
+
+[[bin]]
+name = "stackoverflow"
+path = "src/stackoverflow.rs"
 
 [dependencies]
 boa_engine = { version = "0.17", features = ["annex-b"] }
 boa_gc = { version = "0.17", features = ["thinvec"] }
 boa_runtime = "0.17"
+
+# Boa is too slow in debug mode
+[profile.dev.package.boa_ast]
+opt-level = 3
+[profile.dev.package.boa_engine]
+opt-level = 3
+[profile.dev.package.boa_gc]
+opt-level = 3
+[profile.dev.package.boa_icu_provider]
+opt-level = 3
+[profile.dev.package.boa_interner]
+opt-level = 3
+[profile.dev.package.boa_macros]
+opt-level = 3
+[profile.dev.package.boa_parser]
+# Setting this to 2 or 3 causes a stack overflow when parsing lots of JS in non-release builds
+opt-level = 3
+[profile.dev.package.boa_profiler]
+opt-level = 3
